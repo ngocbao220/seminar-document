@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1748928842.49456 "/Users/ngocbao/Documents/Document/Season4/Seminar/seminar-document/main.tex" "main.pdf" "main" 1748928845.67488 0
-  "/Users/ngocbao/Documents/Document/Season4/Seminar/seminar-document/main.tex" 1748928842.2982 86142 f02eb1a176e9aefc428a9f521212046d ""
+["pdflatex"] 1748928940.13004 "/Users/ngocbao/Documents/Document/Season4/Seminar/seminar-document/main.tex" "main.pdf" "main" 1748928943.23245 0
+  "/Users/ngocbao/Documents/Document/Season4/Seminar/seminar-document/main.tex" 1748928938.19829 80662 ef1423146cb47c3cb4a3793b1cc6ea94 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
@@ -103,10 +103,10 @@
   "fig/fig2.png" 1748926042.94229 219215 877d7551418510118a9257baf8265f74 ""
   "fig/fig3.png" 1748926042.93548 368245 e5f005c7c27cbb43664c94014b53f1f4 ""
   "fig/fig5.png" 1748926042.91851 474831 98f54f809e45c8bfe96df8b09c4aca9c ""
-  "main.aux" 1748928845.59837 13814 49ca73f740a59c374309ec1741d42d04 "pdflatex"
-  "main.out" 1748928845.60036 16280 adee1393275e5a8a78410b9df100cfea "pdflatex"
-  "main.tex" 1748928842.2982 86142 f02eb1a176e9aefc428a9f521212046d ""
-  "main.toc" 1748928845.60062 7634 7f19ca98ea53e7463106cad2e9dbaedc "pdflatex"
+  "main.aux" 1748928943.1549 13814 3692c6044af7bf4d9ec5ea86ac2973a8 "pdflatex"
+  "main.out" 1748928943.1569 16280 adee1393275e5a8a78410b9df100cfea "pdflatex"
+  "main.tex" 1748928938.19829 80662 ef1423146cb47c3cb4a3793b1cc6ea94 ""
+  "main.toc" 1748928943.15717 7634 7f19ca98ea53e7463106cad2e9dbaedc "pdflatex"
   "table/tab1.png" 1748926019.10794 165972 b4930450db79a6bf82e6740765703133 ""
   "table/tab10.png" 1748926018.93697 138835 c79d23757c958a2649fa4179a859d681 ""
   "table/tab11.png" 1748926018.93051 144146 19de6949617a4a417c4fbf355cc68a92 ""

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.4.12)  3 JUN 2025 12:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.4.12)  3 JUN 2025 12:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -906,11 +906,7 @@ l.728
 
 [38]
 
-[39]
-
-[40]
-
-[41] (./main.aux)
+[39] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -923,18 +919,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: ADEE1393275E5A8A78410B9DF100CFEA;16280.
  ) 
 Here is how much of TeX's memory you used:
- 14608 strings out of 473190
- 230229 string characters out of 5715800
+ 14586 strings out of 473190
+ 229972 string characters out of 5715800
  689437 words of memory out of 5000000
- 37292 multiletter control sequences out of 15000+600000
+ 37288 multiletter control sequences out of 15000+600000
  578196 words of font info for 166 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,7n,79p,1068b,742s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/vntex/vnr/vnbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/vntex/vnr/vnr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/vntex/vnr/vnti12.pfb>
-Output written on main.pdf (42 pages, 2552841 bytes).
+Output written on main.pdf (40 pages, 2547007 bytes).
 PDF statistics:
- 717 PDF objects out of 1000 (max. 8388607)
- 624 compressed objects within 7 object streams
- 183 named destinations out of 1000 (max. 500000)
+ 688 PDF objects out of 1000 (max. 8388607)
+ 598 compressed objects within 6 object streams
+ 165 named destinations out of 1000 (max. 500000)
  29316 words of extra memory for PDF output out of 29859 (max. 10000000)
 

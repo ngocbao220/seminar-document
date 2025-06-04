@@ -12,15 +12,17 @@
 \usepackage{array}
 \usepackage{multirow}
 \usepackage{tabularx}
+\usepackage{authblk} % For better author formatting
+
+\usepackage{caption}
+\captionsetup[figure]{labelformat=empty}
 
 \begin{document}
-
-% Trang bìa
 \begin{titlepage}
     \centering
     \vspace*{2cm}
     {\LARGE \textbf{BÁO CÁO PHÂN TÍCH BÀI BÁO}}\\[1.5cm]
-    {\Large \textit{ChatGPT, Trí tuệ Nhân tạo Tạo sinh, Mô hình Ngôn ngữ Lớn và Tư vấn Đầu tư}}\\[1cm]
+    {\Large \textit{ChatGPT, AI Tạo sinh, Mô hình Ngôn ngữ Lớn và Tư vấn Đầu tư}}\\[1cm]
     \vspace{2cm}
     \textbf{Tác giả chính của bài báo:}\\[0.2cm]
     Lei Huang, Fangzhou Lu, Sixuan Li\\[1cm]
@@ -33,20 +35,15 @@
     \vfill
 \end{titlepage}
 
-\tableofcontents
-\newpage
+\begin{abstract}
+Các mô hình ngôn ngữ lớn (LLMs), bao gồm cả ChatGPT, tận dụng khả năng suy luận của mình để tạo ra các đề xuất danh mục đầu tư vượt xa khả năng phân tích văn bản thông thường. Bằng cách tinh chỉnh mô hình LLM với dữ liệu huấn luyện cụ thể và điều chỉnh các tham số của ChatGPT để tăng cường tính linh hoạt đầu ra, có tiềm năng để ChatGPT tạo ra các danh mục đầu tư vượt trội so với các chuẩn mực thị trường trong các thử nghiệm ngoài mẫu. 
 
+Nghiên cứu này áp dụng phương pháp tiếp cận đa ngôn ngữ và đa nguồn dữ liệu để đánh giá hiệu quả của LLMs trong phân tích tài chính. Sử dụng hai loại dữ liệu văn bản khác nhau bằng các ngôn ngữ khác nhau – các bài báo từ Wall Street Journal ở Hoa Kỳ và các thông báo chính sách từ chính phủ Trung Quốc – nhóm tác giả chỉ ra rằng ChatGPT có thể tạo ra các danh mục đầu tư với hệ số \textbf{alpha ba yếu tố hàng tháng lên tới 3\%}, đặc biệt là khi phản ứng với các tin tức liên quan đến chính sách. 
 
-% Abstract
-\section*{\begin{center}
-    \textbf{\LARGE Tóm tắt}
-\end{center}
-}
-\noindent
-Các mô hình ngôn ngữ lớn (LLMs), bao gồm cả ChatGPT, tận dụng khả năng suy luận của mình để tạo ra các đề xuất danh mục đầu tư vượt xa khả năng phân tích văn bản thông thường. Bằng cách tinh chỉnh mô hình LLM với dữ liệu huấn luyện cụ thể và điều chỉnh các tham số của ChatGPT để tăng cường tính linh hoạt đầu ra, có tiềm năng để ChatGPT tạo ra các danh mục đầu tư vượt trội so với các chuẩn mực thị trường trong các thử nghiệm ngoài mẫu.
+Kết quả nghiên cứu cũng tiết lộ ba phát hiện quan trọng: (1) Khả năng xử lý ngôn ngữ tự nhiên của LLMs cho phép trích xuất thông tin tài chính tinh vi từ các nguồn phi cấu trúc; (2) Hiệu suất vượt trội thể hiện rõ nhất trong bối cảnh thị trường biến động cao; (3) Mô hình đạt hiệu quả tối ưu khi kết hợp cả phân tích định lượng và định tính. Khi so sánh kết quả này với những phương pháp phân tích văn bản truyền thống dựa trên từ khóa và tần suất xuất hiện, nghiên cứu cho thấy phương pháp truyền thống không tạo ra được các danh mục đầu tư có alpha dương, đồng thời có độ nhạy thấp hơn đối với các yếu tố vĩ mô.
 
-\noindent
-Sử dụng hai loại dữ liệu văn bản khác nhau bằng các ngôn ngữ khác nhau – các bài báo từ Wall Street Journal ở Hoa Kỳ và các thông báo chính sách từ chính phủ Trung Quốc – nhóm tác giả chỉ ra rằng ChatGPT có thể tạo ra các danh mục đầu tư với hệ số \textbf{alpha ba yếu tố hàng tháng lên tới 3\%}, đặc biệt là khi phản ứng với các tin tức liên quan đến chính sách. Khi so sánh kết quả này với những phương pháp phân tích văn bản truyền thống, nghiên cứu cho thấy phương pháp truyền thống không tạo ra được các danh mục đầu tư có alpha dương.
+Những phát hiện này không chỉ chứng minh tính khả thi của việc ứng dụng LLMs trong quản lý danh mục đầu tư mà còn mở ra hướng nghiên cứu mới về tích hợp AI trong phân tích tài chính đa chiều. Nghiên cứu gợi ý rằng sự kết hợp giữa LLMs và các mô hình dự báo truyền thống có thể tạo ra hệ thống hỗ trợ quyết định đầu tư tối ưu trong tương lai.
+\end{abstract}
 
 \newpage
 
@@ -252,11 +249,11 @@ Nghiên cứu sử dụng hai nguồn dữ liệu văn bản lớn và đa dạn
         \item Đặc điểm cổ phiếu được khuyến nghị: beta trung bình 1.06, log vốn hoá 20.4, book-to-market 0.41, momentum 0.13.
     \end{itemize}
 \end{itemize}
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{fig/fig5.png}
-    \caption*{Figure 5: Điểm nhất quán (Coherence) của LDA}
-    \label{fig:fig2}
+    \includegraphics[width=0.5\textwidth]{fig/fig5.png}
+    \caption{Figure 5: Điểm nhất quán (Coherence) của LDA}
 \end{figure}
 
 \noindent
@@ -329,7 +326,7 @@ Bảng 1 (Table 1) trình bày thống kê tóm tắt về đặc điểm cổ p
     \centering
     \includegraphics[width=0.8\textwidth]{fig/fig2.png}
     \caption*{Figure 2: Số lượng báo cáo phát hành chính sách trong chuỗi thời gian}
-    \label{fig:fig2}
+    \
 \end{figure}
 Hình 2 (Figure 2) hiển thị số lượng bản tin chính sách được phát hành theo năm trong giai đoạn mẫu của nghiên cứu, với tổng số hơn 20.000 bản tin Wall Street Journal. ChatGPT nhận thấy khoảng dưới một nửa số bản tin chính sách này có liên quan đến khuyến nghị cổ phiếu theo chuỗi thời gian. Kết quả này không thay đổi nhiều tùy theo tham số nhiệt độ được đặt. Nhìn chung, các thống kê tóm tắt này làm nổi bật sự đa dạng về cả đặc điểm cổ phiếu và nội dung tin tức chính sách, điều này cung cấp một bối cảnh phong phú cho phân tích của nhóm tác giả
 
@@ -355,13 +352,11 @@ Kết quả kiểm tra được tổng hợp trong \textbf{Bảng 2} với hai b
     \centering
     \includegraphics[width=0.8\textwidth]{table/tab2a.png}
     \caption*{Table 2a: Tư vấn đầu tư của ChatGPT và tính hợp lệ tại Mỹ}
-    \label{fig:fig2}
 \end{figure}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{table/tab2b.png}
     \caption*{Table 2b: Tư vấn đầu tư của ChatGPT và tính hợp lệ tại Mỹ (tiếp theo)}
-    \label{fig:fig2}
 \end{figure}
 \textbf{(a)} kết quả đánh giá của nhóm chuyên gia tài chính, và \textbf{(b)} kết quả đánh giá của nhóm sinh viên chuyên ngành tài chính. Ngoài ra, nghiên cứu cũng phân tích tác đồng của tham số nhiệt độ (\textbf{Temperature parameter T}) của ChatGPT - một tham số điều chỉnh mức độ sáng tạo trong phản hồi của mô hình. Cụ thể, ba giá trị nhiệt độ được sử dụng: \textbf{T = 0, T = 1, T = 1.5}. Mỗi giá trị này được áp dụng cho 2 nhóm khuyến nghị: \textbf{Domestic Equity} (khuyến nghị cổ phiếu riêng lẻ trên NYSE hoặc Nasdaq) và \textbf{Sector} (khuyến nghị ngành dựa trên mã ngành SIC hai chữ số).
 \\ 
@@ -410,13 +405,11 @@ Phần kiểm định trong mẫu (In-sample test) được thiết kế nhằm 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{table/tab3b.png}
-    \label{fig:fig2}
 \end{figure}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{table/tab3a.png}
     \caption*{Table 3: Alphas của Cổ phiếu được Đề xuất dựa trên Wall Street Journal: In-sample test}
-    \label{fig:fig2}
 \end{figure}
 Kết quả được trình bày trong \textbf{Bảng 3}, cho thấy hiệu suất của các danh mục đầu tư dựa trên các chỉ số alpha hàng ngày (daily alpha) và thống kê t (t-statistics).
 \begin{itemize}
@@ -448,7 +441,7 @@ Kết quả được trình bày trong \textbf{Bảng 5}, bao gồm alpha tổng
     \centering
     \includegraphics[width=0.5\textwidth]{table/tab5.png}
     \caption*{Table 5: Alphas của Cổ phiếu được Đề xuất dựa trên Wall Street Journal:: Out-sample test}
-    \label{fig:fig2}
+    \
 \end{figure}
 \begin{itemize}
     \item \textbf{Kết quả tổng thể}: Khi \textbf{T=0}, các alpha của danh mục thường \textbf{dương nhưng không có ý nghĩa thống kê}, cho thấy rằng ChatGPT không tạo ra lợi nhuận vượt trội một cách nhất quán trong thời gian ngoài mẫu. Tuy nhiên, khi tăng mức sáng tạo lên \textbf{T=1}, alpha trở nên \textbf{dương hơn và có ý nghĩa thống kê} cho cả EW và VW. Điều này chỉ ra rằng mức độ sáng tạo cao hơn trong khuyến nghị của ChatGPT có thể cải thiện hiệu suất ngoài mẫu.
@@ -475,7 +468,7 @@ Kết quả chi tiết được trình bày trong \textbf{Bảng 6}.
     \centering
     \includegraphics[width=0.5\textwidth]{table/tab6.png}
     \caption*{Table 6: Alphas của Cổ phiếu được Đề xuất dựa trên Wall Street Journal}
-    \label{fig:fig2}
+    \
 \end{figure}
 \begin{itemize}
     \item \textbf{Tổng quan}: Khi T=1, alpha của danh mục đều dương nhưng không có ý nghĩa thống kê, với VW đạt \textbf{3.480}, EW đạt \textbf{4.195}. Điều này cho thấy, sau tinh chỉnh, danh mục vẫn tạo lợi nhuận bất thường nhưng chưa đủ mạnh để khẳng định chắc chắn.
@@ -492,7 +485,7 @@ Kết quả chi tiết được trình bày trong \textbf{Bảng 6}.
     \centering
     \includegraphics[width=0.6\textwidth]{table/tab7a.png}
     \caption*{Table 7: Phân tích của Wall Street Journal so sánh với phân tích văn bản truyền thống}
-    \label{fig:fig2}
+    \
 \end{figure}
 \textbf{Bảng 7} cho thấy ChatGPT vượt trội so với phương pháp phân tích văn bản truyền thống (dựa trên tương tự cosine) ở các chủ đề 3, 4 và 13, chứng minh ưu thế của học máy.
 
@@ -501,7 +494,7 @@ Kết quả chi tiết được trình bày trong \textbf{Bảng 6}.
     \centering
     \includegraphics[width=0.9\textwidth]{fig/fig3.png}
     \caption*{Figure 3: Danh mục đầu tư ngoài mẫu từ Wall Street Journal}
-    \label{fig:fig2}
+    \
 \end{figure}
 \textbf{Hình 3} minh họa lợi nhuận mua và giữ của danh mục ChatGPT so với danh mục thị trường ngoài mẫu.
 \begin{itemize}
@@ -521,7 +514,7 @@ trung ương quản lý, trao cho chính phủ quyền lực rộng rãi và kh�
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{fig/fig2.png}
-    \label{fig:fig2}
+    \
 \end{figure}
 \textbf{Hình 2} cho thấy số lượng công bố tin tức chính sách theo năm trong giai đoạn mẫu của nhóm tác giả với tổng cộng hơn \textbf{8000 tin tức chính sách}. ChatGPT nhận thấy khoảng một nửa số công bố chính sách này là liên quan đến việc khuyến nghị cổ phiếu trong chuỗi thời gian. Kết quả này \textbf{không thay đổi nhiều} bởi tham số T mà nhóm tác giả đặt, tương tự như đối với Wall Street Journal.
 \subsection{Bài kiểm tra lập luận dựa trên đánh giá của con người}
@@ -568,7 +561,7 @@ Nghiên cứu tiến hành kiểm định trong mẫu để đánh giá hiệu q
     \centering
     \includegraphics[width=0.8\textwidth]{table/tab9b.png}
     \caption*{Table 9: Kiểm định trong mẫu các khuyến nghị cổ phiếu dựa trên công bố chính sách của Quốc vụ viện Trung Quốc}
-    \label{fig:fig2}
+    \
 \end{figure}
 \begin{itemize}
     \item Với \textbf{ChatGPT 3.5} và \textbf{T = 1} (nhiệt độ cao), danh mục nắm giữ trong vòng \textbf{1 tháng} cho kết quả vượt trội:
@@ -643,7 +636,7 @@ Kết quả kiểm định được trình bày trong Bảng 10 của bài báo 
     \centering
     \includegraphics[width=0.7\textwidth]{table/tab10.png}
     \caption*{Table 10: Kiểm định ngoài mẫu các khuyến nghị cổ phiếu dựa trên công bố chính sách của Quốc vụ viện Trung Quốc}
-    \label{fig:fig2}
+    \
 \end{figure}
 \begin{itemize}
     \item \textbf{Toàn bộ dữ liệu:} Khi sử dụng ChatGPT 3.5 với \textbf{T = 1}, alpha hàng ngày đạt:
@@ -686,7 +679,7 @@ Kết quả tổng thể khi áp dụng fine-tuning cho toàn bộ các chủ đ
     \centering
     \includegraphics[width=0.5\textwidth]{table/tab11.png}
     \caption*{Table 11: Alpha của cổ phiếu được khuyến nghị dựa trên công bố chính sách của Quốc vụ viện Trung Quốc trong các kiểm định ngoài mẫu.}
-    \label{fig:fig2}
+    \
 \end{figure}
 \begin{itemize}
     \item Với T=0: alpha của danh mục VW là 0.582 bps và EW là 0.492 bps – đều không có ý nghĩa thống kê.
@@ -707,7 +700,7 @@ Xét riêng theo từng chủ đề, một số chủ đề thể hiện hiệu 
     \centering
     \includegraphics[width=0.6\textwidth]{table/tab12.png}
     \caption*{Table 12: Đối chiếu công bố chính sách của Quốc vụ viện Trung Quốc với phân tích văn bản truyền thống.}
-    \label{fig:fig2}
+    \
 \end{figure}
 Để đối chứng, nhóm tác giả sử dụng phương pháp phân tích văn bản truyền thống – cụ thể là đo độ tương đồng cosine giữa văn bản tin tức và các báo cáo tài chính hoặc earning calls của doanh nghiệp. Kết quả từ phương pháp này không tạo ra bất kỳ danh mục nào có alpha dương có ý nghĩa thống kê, cho thấy sự vượt trội của ChatGPT sau khi được tinh chỉnh.
 

@@ -1,30 +1,56 @@
 \documentclass{article}
+
+% Recommended, but optional, packages for figures and better typesetting:
 \usepackage[final, main]{neurips_2025}
-\usepackage{lineno}
+\usepackage{microtype}
 \usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{booktabs} % for professional tables
+
+% hyperref makes hyperlinks in the resulting PDF.
+\usepackage{hyperref}
+
+% Attempt to make hyperref and algorithmic work together better:
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+
+% Standard packages
+\usepackage{lineno}
 \usepackage{natbib}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{url}
-\usepackage{hyperref}
 \usepackage{algorithm}
 \usepackage{algorithmic}
-\usepackage{booktabs}
 \usepackage{multirow}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta, shapes.geometric, positioning, fit}
 \usepackage{xcolor}
-\usepackage{times}
-\usepackage{helvet}
-\usepackage{courier}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
 
-\title{Deepseek for Investment Advisory: Generating and Evaluating Stock Recommendations}
+% Define custom prompt boxes
+\newtcolorbox{promptbox}{
+  colback=blue!5!white,
+  colframe=blue!75!black,
+  sharp corners,
+  boxrule=0.5pt,
+  fonttitle=\bfseries
+}
+
+\newtcolorbox{auditbox}{
+  colback=red!5!white,
+  colframe=red!75!black,
+  sharp corners,
+  boxrule=0.5pt,
+  fonttitle=\bfseries
+}
+
+
+\title{Evaluating Stock Recommendations from Generative AI: \\ An Experiment Using Deepseek for Generation \\ and Grok for Auditing}
 
 \author{
   Trinh Tuan Ngoc Bao,
   Nguyen Vu Quang Anh,
   Phan Tran Manh Cuong \\
-  VNU University of Engineering and Technology\\
+  VNU University of Engineering and Technology, Hanoi, Vietnam\\
   \texttt{ngocbaotrinhtuan@gmail.com}
 }
 
@@ -33,66 +59,101 @@
 \maketitle
 
 \begin{abstract}
-Large language models (LLMs) like Deepseek offer advanced capabilities for generating investment recommendations by processing complex textual data. We utilize Deepseek to produce stock recommendations based on Wall Street Journal articles, achieving a monthly three-factor alpha of up to 3.2% in out-of-sample tests. These recommendations are evaluated by expert financial analysts for relevance and investment potential, demonstrating Deepseek’s superior performance over traditional textual analysis methods, which fail to yield positive alpha. This study highlights Deepseek’s potential to transform investment advisory through AI-driven stock selection. \\
-
-Keywords: Generative AI, Deepseek, Stock Recommendations, Investment Advisory
+Large Language Models (LLMs) are pioneering new methodologies in investment advisory. This study explores a fully automated pipeline where we utilize one generative AI (Deepseek) to produce stock recommendations from financial news, and subsequently use another AI (Grok) to evaluate the quality of those recommendations. Our objective is to test the feasibility of using AI not only for idea generation but also for their screening and validation, simulating an analysis workflow without human financial experts. The results show that Deepseek is capable of complex contextual reasoning and identifying potential investment themes. However, its recommendations still contain factual errors and hallucinations. Notably, the Grok model acted effectively as an "AI auditor," successfully identifying most of the weaknesses in Deepseek's output. This work demonstrates the potential of an "AI-audits-AI" model as an initial screening step but also underscores that human oversight remains indispensable for final investment decisions.
 \end{abstract}
 
 \section{Introduction}
-The emergence of large language models (LLMs) has revolutionized financial advisory by enabling sophisticated analysis of textual data for investment decisions. Deepseek, a cutting-edge LLM, excels in interpreting financial news to generate actionable stock recommendations. This paper explores Deepseek’s application in producing U.S. stock recommendations based on Wall Street Journal articles, followed by a rigorous evaluation of these recommendations by financial experts. Our findings demonstrate Deepseek’s ability to construct portfolios that outperform market benchmarks, offering a scalable solution for investment advisory.
+
+The evolution of generative AI has spurred a wave of innovation in the financial industry. Previous works, such as that of \citet{fang2023chatgpt}, have demonstrated that LLMs can extract predictive signals from financial news. This raises a subsequent question: Can we automate the entire cycle from reading news and generating investment ideas to preliminarily validating those ideas?
+
+This study addresses that question by proposing and testing a two-step process. First, we assign Deepseek the role of an "Idea-Generating AI," tasking it with reading news and proposing specific stocks. Second, instead of relying on human financial experts for evaluation, we deploy an "Auditor AI," Grok, with the mission of objectively validating Deepseek's recommendations.
+
+Our main contribution is the presentation of a novel methodology: using one AI to evaluate another in a complex financial task. We not only assess Deepseek's capabilities but also test whether Grok can serve as a reliable quality gatekeeper.
 
 \section{Related Work}
-Previous research in financial NLP has focused on sentiment analysis and keyword-based methods to predict stock performance \citep{tetlock2008, loughran2011}. These approaches often lack the contextual depth required to capture complex market dynamics. Recent LLMs, such as GPT and BERT, have improved text comprehension for financial applications \citep{araci2019, yang2020}. Deepseek advances this further with enhanced reasoning capabilities, making it ideal for generating precise stock recommendations. Our work leverages Deepseek to bridge the gap between textual analysis and actionable investment strategies.
 
-\section{Method}
-We use Deepseek to generate stock recommendations through a structured conversational query, simulating interactions with a financial advisor. The methodology includes prompt design, fine-tuning, and expert evaluation.
+The foundation of this research lies in two areas. The first is the application of NLP in finance, from dictionary-based methods \citep{loughran2011} to transformer models like BERT and more recent work on ChatGPT in sentiment analysis \citep{fang2023chatgpt}. The second is the field of research on the reasoning and fact-checking capabilities of LLMs themselves, where models are used to self-correct or evaluate the outputs of other models. Our research is situated at the intersection of these two fields, applying the "AI-audits-AI" model to the practical problem of investment advisory.
 
-\subsection{Stock Recommendation Prompt}
-The prompt for Deepseek is:
-``Assume you are a senior financial analyst. Carefully read the following news from the Wall Street Journal. Based on the news content, if you recommend buying stocks, write `YES’ and list five NYSE or Nasdaq stock names with their ticker symbols. If you answer `NO,’ briefly explain why.”
+\section{Methodology}
 
-\subsection{Fine-Tuning Deepseek}
-To optimize Deepseek’s recommendations, we fine-tuned the model using Wall Street Journal articles from 2018–2019. For each article, we provided Deepseek with the top five performing stocks in the relevant industry (based on two-digit SIC codes) to refine its output. The temperature parameter was set to 1 to ensure a balance between creativity and consistency.
+Our experimental process consists of two main stages: (1) The Recommendation Generation Stage by Deepseek and (2) The Quality Auditing Stage by Grok.
 
-\subsection{Evaluation Process}
-Deepseek’s recommendations were evaluated by a panel of CFA Level 3-certified financial analysts and CFA Level 1-certified finance students. Each recommendation was assessed based on:
+\subsection{Stage 1: Recommendation Generation by Deepseek}
+
+We utilized the \texttt{deepseek-r1:7b} model accessed via a local server. To trigger the model's analytical capabilities, we designed a detailed role-playing prompt, instructing it to act as an expert.
+
+\begin{promptbox}[title={Prompt sent to Deepseek}]
+Assume you are a senior financial analyst. Please carefully read the following news from the Wall Street Journal. Based on the content of the news, if you would advise buying any stocks, write ‘YES’ and list 5 NYSE or Nasdaq stock names along with their ticker symbols. If your answer is simply ‘NO’, please briefly explain why.
+\end{promptbox}
+
+\subsection{Stage 2: Recommendation Auditing by Grok}
+
+After Deepseek generated a list of recommendations, we forwarded the entire output (including the original article and Deepseek's recommendation) to Grok for evaluation. The goal was for Grok to act as a second, critical-thinking analyst.
+
+\begin{auditbox}[title={Prompt sent to Grok}]
+You are a risk management and fact-checking expert in the financial sector. Below is a news article and an investment recommendation generated by another analytical AI. Your task is to rigorously evaluate this recommendation based on three criteria:
+\begin{enumerate}
+    \item \textbf{Relevance:} Are the recommended stocks truly relevant to the article's content?
+    \item \textbf{Reasonableness:} Is the (even implicit) rationale behind selecting these stocks logical and economically sound?
+    \item \textbf{Factual Accuracy:} Are the company names and ticker symbols correct? Are there any "hallucinated" companies?
+\end{enumerate}
+Provide your analysis and conclude whether this recommendation is "Reliable" or "Requires Review".
+
+\vspace{5pt}
+\noindent\rule{\textwidth}{0.4pt}
+\textit{[Original News Article Text]}
+
+\textit{[Recommendation from Deepseek]}
+\end{auditbox}
+
+
+\section{Experiments and Results}
+
+We applied the above process to a set of financial news articles. A preliminary backtest on Deepseek's recommendations showed positive alpha signals, indicating the predictive potential of the method. However, the focus of this study is the qualitative analysis through Grok's auditing.
+
+\subsection{Case Study: Cross-Evaluation between Deepseek and Grok}
+
+We analyze a typical example concerning a news article about U.S. solar tariff policies.
+
 \begin{itemize}
-    \item Relevance to the industry mentioned in the news.
-    \item Reasonableness of the rationale behind the recommendation.
-    \item Potential investment opportunity based on the news and recommended stocks.
+    \item \textbf{Deepseek's Output:} Deepseek responded with 'YES' and proposed 5 stocks, including First Solar (FSLR), NextEra Energy (NEE), Siemens Solar Cells (SNEURY), and Perion Power (PRW).
+    
+    \item \textbf{Grok's Analysis:}
+    \begin{itemize}
+        \item \textit{On Relevance and Reasonableness:} Grok agreed that recommending solar energy companies like First Solar and NextEra Energy was highly relevant and directly related to the news. Grok acknowledged Deepseek's good contextual reasoning.
+        \item \textit{On Factual Accuracy:} This is where Grok demonstrated its "auditor" role. It pointed out critical errors:
+            \begin{enumerate}
+                \item \textbf{Repetition:} Recommending "First Solar" twice.
+                \item \textbf{Outdated/Incorrect Information:} Grok noted that "Siemens Solar Cells" is no longer an independent entity and the ticker SNEURY belongs to Siemens Energy, a less direct play.
+                \item \textbf{Hallucination:} Grok identified that "Perion Power (PRW)" is a non-existent company, and the ticker PRW belongs to an unrelated ad-tech company.
+            \end{enumerate}
+    \end{itemize}
+    \item \textbf{Grok's Conclusion:} Grok concluded that the recommendation "Requires Review" due to serious factual errors, even though the initial analytical direction was correct.
 \end{itemize}
-Two analysts independently reviewed each recommendation. If they agreed, the result was accepted. In cases of disagreement (8% of samples), a third analyst was consulted, and the majority decision prevailed. No cases required exclusion due to complete disagreement.
 
-\section{Experiments}
-We tested Deepseek’s performance using Wall Street Journal articles from January 2020 to August 2023, comprising over 20,000 news items. Deepseek identified approximately 45% of these as relevant for stock recommendations. Key results include:
-\begin{itemize}
-    \item Deepseek-generated portfolios achieved a monthly three-factor alpha of up to 3.2% in out-of-sample tests, significantly outperforming traditional textual analysis methods, which produced near-zero or negative alpha.
-    \item Recommended stocks exhibited characteristics such as beta (Scholes-Williams-Dimson), market capitalization, book-to-market ratio, investment, profitability, momentum (Jegadeesh-Titman), and short-term reversal (Jegadeesh-Lehmann), as shown in Table 1.
-\end{itemize}
-
-\begin{table}[h]
-\centering
-\caption{Summary Statistics for Stock Characteristics}
-\begin{tabular}{lc}
-\toprule
-\textbf{Stock Characteristic} & \textbf{U.S. Market} \\
-\midrule
-Beta (Scholes-Williams-Dimson) & 1.12 \\
-Market Capitalization (SIZE) & \$15.2B \\
-Book-to-Market Ratio (BM) & 0.45 \\
-Investment (INV) & 0.32 \\
-Profitability (PROFIT) & 0.18 \\
-Momentum (MOM) & 0.25 \\
-Short-term Reversal (REV) & -0.05 \\
-\bottomrule
-\end{tabular}
-\end{table}
+This result shows that the two-AI model worked as expected: Deepseek generated a promising but raw idea, and Grok effectively screened and detected the flaws.
 
 \section{Limitations and Future Work}
-Deepseek’s performance depends on the quality and clarity of input news data, with ambiguous articles potentially leading to less accurate recommendations. The fine-tuning process is also resource-intensive. Future work will explore integrating real-time market data and expanding Deepseek’s application to other financial markets to enhance recommendation robustness.
+
+The biggest limitation of the "AI-audits-AI" approach is the risk of \textbf{correlated bias}. Both Deepseek and Grok are trained on large datasets and may share the same "blind spots" or biased tendencies. A mistake that both AIs fail to recognize would go undetected in this process.
+
+Furthermore, Grok's evaluation is not yet a "gold standard." It can still make mistakes.
+
+Future work should include:
+\begin{enumerate}
+    \item \textbf{Human-in-the-Loop Validation:} Compare Grok's evaluation results with those of human financial experts to verify the reliability of the "AI auditor."
+    \item \textbf{Database Integration:} Integrate the LLM with structured financial databases (like Bloomberg, Refinitiv) for automated fact-checking instead of relying on another LLM.
+\end{enumerate}
 
 \section{Conclusion}
-Deepseek demonstrates exceptional potential in investment advisory by generating stock recommendations from Wall Street Journal articles, achieving a monthly three-factor alpha of up to 3.2%. Expert evaluations confirm the relevance and investment potential of these recommendations, surpassing traditional textual analysis methods. This study underscores Deepseek’s transformative role in AI-driven stock selection and its promise for advancing financial advisory practices.
+
+Our research demonstrates the feasibility of an automated pipeline using one AI (Deepseek) to generate investment recommendations and another AI (Grok) to audit them. Deepseek showed its ability to identify investment opportunities from news, while Grok acted as an effective first-layer filter to detect basic errors.
+
+This "AI-audits-AI" model opens a promising path to accelerate the process of generating and screening investment ideas. However, it cannot completely replace the deep judgment and due diligence of humans. The most appropriate role for this process today is as a powerful support tool, helping analysts filter the most promising ideas from a vast amount of information before they apply their expertise to make the final decision.
+
+% In the unusual situation where you want a paper to appear in the
+% references without citing it in the main text, use \nocite
+\nocite{*}
 
 \bibliographystyle{plainnat}
 \bibliography{references}

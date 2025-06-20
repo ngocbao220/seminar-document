@@ -1,0 +1,23 @@
+# Stock Recommendation Project
+
+## Mô tả
+Dự án này crawl bài báo từ Wall Street Journal, phân tích để đưa ra khuyến nghị cổ phiếu/ngành, và hỗ trợ đánh giá khuyến nghị bởi các nhà phân tích.
+
+## Cài đặt
+1. Cài đặt Python 3.8+.
+2. Cài đặt các thư viện: `pip install -r requirements.txt`.
+3. Cài đặt ChromeDriver cho Selenium.
+4. Cập nhật thông tin đăng nhập trong `config/config.py`.
+5. Làm theo hướng dẫn: https://www.youtube.com/watch?v=HnbRmsjnajA
+
+## Cách chạy
+1. Tạo dữ liệu mẫu: `python src/create_sample_csv.py`
+2. Crawl bài báo: `python src/scrape_wsj_articles.py`
+3. Phân tích bài báo: `python src/analyze_articles.py`
+4. Đánh giá khuyến nghị: `python src/evaluate_recommendations.py`
+5. Đọc nội dung bài báo: `python src/read_articles.py`
+
+## Cấu trúc thư mục
+- `data/`: Lưu trữ file dữ liệu (CSV, text).
+- `src/`: Mã nguồn Python.
+- `config/`: File cấu hình.

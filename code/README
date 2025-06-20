@@ -8,7 +8,7 @@ Dự án này crawl bài báo từ Wall Street Journal, phân tích để đưa 
 2. Cài đặt các thư viện: `pip install -r requirements.txt`.
 3. Cài đặt ChromeDriver cho Selenium.
 4. Cập nhật thông tin đăng nhập trong `config/config.py`.
-5. Làm theo hướng dẫn: https://www.youtube.com/watch?v=HnbRmsjnajA
+5. Làm theo hướng dẫn: https://www.youtube.com/watch?v=HnbRmsjnajA để lấy api deekseek
 
 ## Cách chạy
 1. Tạo dữ liệu mẫu: `python src/create_sample_csv.py`
